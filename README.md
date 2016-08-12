@@ -1,4 +1,4 @@
-The ExtractTermsRuta code builds a dictionary of terms for use by Ruta from i2b2's ontology.
+The xmeso-TermExtractor code builds a dictionary of terms for use by Ruta from i2b2's ontology.
 The code interfaces with the Unified Medical Language System (UMLS) API
 
 https://documentation.uts.nlm.nih.gov/
@@ -30,10 +30,13 @@ Use python to execute the __main__ method in TermExtractor.py
 The output will contain different messages depending on the codes extracted from i2b2.
 
 "Found new category.  Loading terms for category: XXXX" this indicates the code found a new category of i2b2 terms to load.
+
 "Could not find prefix for basecode: XXXX" this message is caused by some i2b2 terms with 
     basecodes not found in UMLS (ex: PATH|IMMUNH:UN)
+    
 "Error retrieving synonyms for concept [XXXXX].  Error: concept" this message is caused by
     i2b2 terms with basecodes not found in UMLS (see above).
+    
 "Error retrieving extractSeedConcept: 'NoneType' object has no attribute 'group'" this indicates 
     that the code is attempting to process a top-level node (ex: /SURGICAL MARGINS/).  These
     i2b2 items do not need to be searched.
