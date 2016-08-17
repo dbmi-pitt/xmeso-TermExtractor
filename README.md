@@ -14,7 +14,7 @@ and rename it dbconf.py.  In dbconf.py, you need to set the following values:
 
 https://documentation.uts.nlm.nih.gov/rest/authentication.html
 
-- outputDir the directory where the completed  
+- outputDir the directory where the completed files will be written  
 
 
 -- Python pre-requisites --
@@ -27,7 +27,7 @@ requests
 
 -- Running the code --
 Use python to execute the __main__ method in TermExtractor.py
-The output will contain different messages depending on the codes extracted from i2b2.
+The output will contain different messages depending on the codes extracted from i2b2.  You can ignore these messages, they merely provide extra information about the processing.
 
 "Found new category.  Loading terms for category: XXXX" this indicates the code found a new category of i2b2 terms to load.
 
@@ -44,13 +44,13 @@ The output will contain different messages depending on the codes extracted from
 The code generate several lines when it outputs the data to files (where XXXX is the "category"):
 
 Opening files for output.
-Opening file: /Users/chb69/borromeocd/nmvb/nlp_work/ruta_XXXX.txt
+Opening file: /nmvb/nlp_work/ruta_XXXX.txt
 Closing file
 ...
 Done.
 
 
-
+-- Overall Workflow --
 The code performs the following steps:
 
 1.  Execute a SQL query to retrieve the term list from i2b2's ontology (the metadata schema)
