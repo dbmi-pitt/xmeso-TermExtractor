@@ -3,9 +3,9 @@ The code interfaces with the Unified Medical Language System (UMLS) API
 
 https://documentation.uts.nlm.nih.gov/
 
-** Pre-requisites **
+## Pre-requisites
 
--- dbconf.py --
+### dbconf.py
 The code contains a dbconf_example.py file.  This file is an example.  Please copy it
 and rename it dbconf.py.  In dbconf.py, you need to set the following values:
 
@@ -17,40 +17,41 @@ https://documentation.uts.nlm.nih.gov/rest/authentication.html
 - outputDir the directory where the completed files will be written  
 
 
--- Python pre-requisites --
+### Python pre-requisites 
 You must install the following python modules:
-PyQuery
-cx_Oracle 
-urllib2
-requests
+* PyQuery
+* cx_Oracle 
+* urllib2
+* requests
 
 
--- Running the code --
+## Running the code 
 Use python to execute the __main__ method in TermExtractor.py
 The output will contain different messages depending on the codes extracted from i2b2.  You can ignore these messages, they merely provide extra information about the processing.
 
-"Found new category.  Loading terms for category: XXXX" this indicates the code found a new category of i2b2 terms to load.
+```Found new category.  Loading terms for category: XXXX``` this indicates the code found a new category of i2b2 terms to load.
 
-"Could not find prefix for basecode: XXXX" this message is caused by some i2b2 terms with 
+```Could not find prefix for basecode: XXXX``` this message is caused by some i2b2 terms with 
     basecodes not found in UMLS (ex: PATH|IMMUNH:UN)
     
-"Error retrieving synonyms for concept [XXXXX].  Error: concept" this message is caused by
+```Error retrieving synonyms for concept [XXXXX].  Error: concept``` this message is caused by
     i2b2 terms with basecodes not found in UMLS (see above).
     
-"Error retrieving extractSeedConcept: 'NoneType' object has no attribute 'group'" this indicates 
+```Error retrieving extractSeedConcept: 'NoneType' object has no attribute 'group'``` this indicates 
     that the code is attempting to process a top-level node (ex: /SURGICAL MARGINS/).  These
     i2b2 items do not need to be searched.
 
 The code generate several lines when it outputs the data to files (where XXXX is the "category"):
 
+```
 Opening files for output.
 Opening file: /nmvb/nlp_work/ruta_XXXX.txt
 Closing file
 ...
 Done.
+```
 
-
--- Overall Workflow --
+## Overall Workflow 
 The code performs the following steps:
 
 1.  Execute a SQL query to retrieve the term list from i2b2's ontology (the metadata schema)
