@@ -17,7 +17,7 @@ https://documentation.uts.nlm.nih.gov/rest/authentication.html
 - outputDir the directory where the completed files will be written  
 
 
-### Python pre-requisites 
+### Python Modules 
 You must install the following python modules:
 * PyQuery
 * cx_Oracle 
