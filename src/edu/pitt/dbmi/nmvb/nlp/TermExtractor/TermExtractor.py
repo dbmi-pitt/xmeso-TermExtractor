@@ -45,7 +45,9 @@ def loadUmlsSemanticTypes():
             
 
 # This method creates an array of the "seed" data to use when searching for the values
-# The seed data is assumed to contain a set of labels (used for searching) and terminology codes (SNOMED, ICD9, etc.)  
+# The seed data is assumed to contain a set of labels (used for searching) and terminology codes (SNOMED, ICD9, etc.)
+# NOTE: c_fullname is not sent to the output file, but it is used to determine category so it needs to stay in the SQL query
+  
 def getSeedData(meta_db_obj):
     con = meta_db_obj.getConnection()
     cursor = con.cursor()
@@ -117,13 +119,14 @@ def getSeedData(meta_db_obj):
 
 
 def extractSeedConcept(row):
+    #NOTE: path is not sent to the output file, but it is used to determine category (see below)
     strCategory = row[3]
     if row[3] == None or row[3] == '':
         # if row[3] (category column) is empty, 
         # try extracting the category from row[0] instead
         m = re.search(r'\\(.*?)\\.*?\\', row[0])
         strCategory = str(m.group(1)).title()
-    new_record = {"path" : row[0], "label": row[1], "basecode": str(row[2]).strip(), "category": strCategory}
+    new_record = {"label": row[1], "basecode": str(row[2]).strip(), "category": strCategory}
     return new_record
 
 def getUMLSPrefix(basecode):
@@ -396,13 +399,13 @@ def dumpData(dataset):
             print "Opening file: " + newFileName
             fOutput = open(newFileName, 'w')
         delimiter = ";"
-        data_list = [str(data["path"]), str(data["label"]), str(data["basecode"]), str(data["category"]), str(data["penalty"])]
+        data_list = [str(data["label"]), str(data["basecode"]), str(data["category"]), str(data["penalty"])]
         strLine = delimiter.join(data_list)
         fOutput.write(strLine + '\n')
     fOutput.close()
 
 def extractConceptFromRow(row):
-    new_record = {"path" : row[0], "label": row[1], "basecode": str(row[2]).strip(), "category": row[3]}
+    new_record = {"label": row[1], "basecode": str(row[2]).strip(), "category": row[3]}
     return new_record
     
     
