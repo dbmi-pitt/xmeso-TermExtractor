@@ -377,7 +377,7 @@ def getUMLSServiceTicket(username, password, apiKey):
 
 def getFileName(category):
     newName = category.replace (" ", "_")
-    newName = 'ruta_' + str(newName).lower() + '.txt'
+    newName = str(newName).lower() + '.csv'
     newName = dbconf.outputDir + newName
     return newName
 
